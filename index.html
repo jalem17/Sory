@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<!-- STREAMING_CHUNK:Setting up document structure and fonts -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>آسف يا روحي فطوم</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700;800;900&display=swap" rel="stylesheet">
+<!-- STREAMING_CHUNK:Defining core CSS and animations -->
+    <style>
+        * {
+            font-family: 'Tajawal', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            overflow: hidden;
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        @keyframes gradientBG {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            box-shadow: 0 25px 50px -12px rgba(255, 105, 135, 0.3);
+            width: 90%;
+            max-width: 400px;
+            height: 85vh;
+            max-height: 700px;
+            border-radius: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+<!-- STREAMING_CHUNK:Adding text and element specific animations -->
+        .step {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            pointer-events: none;
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .step.active {
+            opacity: 1;
+            pointer-events: auto;
+            transform: scale(1) translateY(0);
+        }
+
+        .floating {
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, #ff0844 0%, #ffb199 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-size: 200% auto;
+            animation: shine 3s linear infinite;
+        }
+
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #ff416c, #ff4b2b);
+            color: white;
+            box-shadow: 0 10px 20px -5px rgba(255, 65, 108, 0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+            animation: pulseBtn 2s infinite;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.95);
+        }
+
+        @keyframes pulseBtn {
+            0% { box-shadow: 0 0 0 0 rgba(255, 65, 108, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(255, 65, 108, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 65, 108, 0); }
+        }
+
+        #btn-no {
+            position: absolute;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            background: #9ca3af;
+            color: white;
+            z-index: 50;
+        }
+
+        .falling-heart {
+            position: fixed;
+            top: -10vh;
+            font-size: 2rem;
+            animation: fall linear forwards;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        @keyframes fall {
+            to { transform: translateY(120vh) rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+
+<!-- STREAMING_CHUNK:Building the app screens (Step 1 to 3) -->
+    <div class="glass-card">
+        
+        <div id="step-1" class="step active text-center">
+            <img src="https://media.tenor.com/TKaqGA-S07wAAAAi/peach-cat.gif" alt="Cute Bear" class="w-48 h-48 object-cover rounded-3xl floating shadow-lg mb-8">
+            <h1 class="text-4xl font-black mb-4 text-gradient">يا أجمل فطوم ✨</h1>
+            <p class="text-xl text-gray-700 font-semibold mb-8 leading-relaxed text-opacity-90">عندي كلام طالع من أعماق قلبي، ممكن تعطيني دقيقة من وقتك الحلو؟</p>
+            <button onclick="goToStep(2)" class="btn-primary px-10 py-4 rounded-full font-bold text-xl w-full">أكيد، هات ما عندك 💕</button>
+        </div>
+
+        <div id="step-2" class="step text-center">
+            <img src="https://media.tenor.com/Z4w7W5dIKsAAAAAi/peach-cat-crying.gif" alt="Sad Bear" class="w-48 h-48 object-cover rounded-3xl floating shadow-lg mb-8">
+            <h2 class="text-3xl font-extrabold text-red-500 mb-4">أنا عارف إني غلطت..</h2>
+            <p class="text-xl text-gray-700 font-medium mb-8 leading-relaxed">تصرفت بغباء وطلعت مني تصرفات ما تليق بمقامك، وعارف إني جرحت أحن قلب بالدنيا.</p>
+            <button onclick="goToStep(3)" class="btn-primary px-10 py-4 rounded-full font-bold text-xl w-full">وبعدين؟ 🥺</button>
+        </div>
+
+        <div id="step-3" class="step text-center">
+            <img src="https://media.tenor.com/9Y1Z99g4_4kAAAAi/peach-cat-sad.gif" alt="Heartbroken Bear" class="w-48 h-48 object-cover rounded-3xl floating shadow-lg mb-8">
+            <h2 class="text-3xl font-extrabold text-red-500 mb-4">الدنيا بدونك رمادية 💔</h2>
+            <p class="text-lg text-gray-700 font-medium mb-8 leading-relaxed">والله إن غيابك وزعلك خنقني، ضحكتك هي اللي منورة حياتي، وما أتحمل أشوف الزعل بعيونك بسببي.</p>
+            <button onclick="goToStep(4)" class="btn-primary px-10 py-4 rounded-full font-bold text-xl w-full">كمل كلامك...</button>
+        </div>
+
+<!-- STREAMING_CHUNK:Building the app screens (Step 4 to 6) -->
+        <div id="step-4" class="step text-center">
+            <img src="https://media.tenor.com/cOM2B84DxyYAAAAi/peach-cat-cry.gif" alt="Crying Bear" class="w-48 h-48 object-cover rounded-3xl floating shadow-lg mb-8">
+            <h2 class="text-3xl font-extrabold text-gradient mb-4">أعتذر بحجم السماء</h2>
+            <p class="text-lg text-gray-700 font-medium mb-8 leading-relaxed">آسف على كل دمعة نزلت منك وكل ضيقة خاطر حسيتي فيها. إنتي أغلى شي أملكه وما أبي أخسرك أبداً.</p>
+            <button onclick="goToStep(5)" class="btn-primary px-10 py-4 rounded-full font-bold text-xl w-full">طيب... 😭</button>
+        </div>
+
+        <div id="step-5" class="step text-center">
+            <img src="https://media.tenor.com/bK1qsWjveZ8AAAAi/peach-cat-please.gif" alt="Begging Bear" class="w-48 h-48 object-cover rounded-3xl floating shadow-lg mb-6">
+            <h2 class="text-3xl font-extrabold text-pink-600 mb-4">عشان خاطري...</h2>
+            <p class="text-xl text-gray-800 font-bold mb-10">تسامحين حبيبك ونفتح صفحة جديدة مليانة حب؟</p>
+            
+            <div class="relative w-full h-32 flex justify-center items-center">
+                <button onclick="goToStep(6)" class="absolute z-10 px-8 py-3 bg-green-500 text-white rounded-full font-bold text-xl shadow-[0_10px_20px_-5px_rgba(34,197,94,0.5)] transform transition hover:scale-110">
+                    أكيد أسامحك ❤️
+                </button>
+                <button id="btn-no" class="px-8 py-3 rounded-full font-bold text-xl shadow-md border-2 border-white">
+                    لا، زعلانة 😤
+                </button>
+            </div>
+        </div>
+
+        <div id="step-6" class="step text-center">
+            <img src="https://media.tenor.com/GWeJdK1wBgwAAAAi/peach-cat-hug.gif" alt="Happy Bear" class="w-56 h-56 object-cover rounded-3xl floating shadow-2xl mb-6 border-4 border-pink-200">
+            <h2 class="text-4xl font-black text-green-500 mb-4 drop-shadow-md">يا روحي إنتي! 😍</h2>
+            <p class="text-xl text-gray-800 font-bold leading-relaxed">كنت متأكد إن قلبك أبيض. أحبك يا أحن وأطيب فطوم بالدنيا، ووعد رجال ما أزعلك مرة ثانية أبددددداً! ❤️🌍</p>
+        </div>
+
+    </div>
+
+<!-- STREAMING_CHUNK:Adding JavaScript logic for steps, dodge button, and heart rain -->
+    <script>
+        function goToStep(step) {
+            document.querySelectorAll('.step').forEach(el => {
+                el.classList.remove('active');
+            });
+            document.getElementById('step-' + step).classList.add('active');
+            if(step === 6) {
+                createHeartRain();
+            }
+        }
+
+        const btnNo = document.getElementById('btn-no');
+        const card = document.querySelector('.glass-card');
+
+        function dodge() {
+            const cardRect = card.getBoundingClientRect();
+            const btnRect = btnNo.getBoundingClientRect();
+            
+            const padding = 20;
+            const maxX = cardRect.width - btnRect.width - padding;
+            const maxY = cardRect.height - btnRect.height - padding;
+
+            const randomX = Math.max(padding, Math.floor(Math.random() * maxX));
+            const randomY = Math.max(padding, Math.floor(Math.random() * maxY));
+
+            btnNo.style.left = `${randomX}px`;
+            btnNo.style.top = `${randomY}px`;
+        }
+
+        btnNo.addEventListener('mouseover', dodge);
+        btnNo.addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            dodge();
+        });
+
+        setTimeout(() => {
+            btnNo.style.left = '50%';
+            btnNo.style.top = '75%';
+            btnNo.style.transform = 'translate(-50%, -50%)';
+        }, 100);
+
+        function createHeartRain() {
+            const emojis = ['❤️', '💖', '💕', '🥰', '🌹', '✨'];
+            for(let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'falling-heart';
+                    heart.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+                    heart.style.left = Math.random() * 100 + 'vw';
+                    heart.style.animationDuration = (Math.random() * 2 + 2) + 's';
+                    heart.style.fontSize = (Math.random() * 1.5 + 1) + 'rem';
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, 4000);
+                }, i * 100);
+            }
+        }
+    </script>
+</body>
+</html>
+```eof
